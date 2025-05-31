@@ -1,0 +1,3 @@
+[submodule "packages/wasm-php/php-wasm"]
+	path = packages/wasm-php/php-wasm
+	url = https://github.com/seanmorris/php-wasm
