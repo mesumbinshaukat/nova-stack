@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "packages/server/src/index.ts",
+      "use": "@vercel/node",
+      "config": { "maxDuration": 10, "memory": 1024 }
+    },
+    {
+      "src": "packages/frontend-react/next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "packages/server/src/index.ts" },
+    { "src": "/(.*)", "dest": "packages/frontend-react/$1" }
+  ]
+} 

@@ -1,0 +1,30 @@
+{
+  "name": "nova-stack",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/server",
+    "packages/cli",
+    "packages/wasm-engine",
+    "packages/chatbot",
+    "packages/frontend-react",
+    "packages/frontend-vue",
+    "packages/frontend-angular",
+    "packages/frontend-svelte",
+    "packages/frontend-solid",
+    "packages/frontend-qwik",
+    "packages/php-laravel",
+    "packages/php-symfony",
+    "packages/utils"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "dev": "npx concurrently \"yarn workspace server dev\" \"yarn workspace frontend-react dev\" \"yarn workspace chatbot dev\"",
+    "setup": "yarn install && cd packages/chatbot && pip install -r requirements.txt",
+    "deploy": "yarn workspace server build && yarn workspace frontend-react build && vercel --prod"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^4.5.4"
+  }
+}

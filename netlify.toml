@@ -1,0 +1,8 @@
+[build]
+  functions = "packages/server/netlify-functions"
+  publish = "packages/frontend-react/out"
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/server"
+status = 200
+force = true 
