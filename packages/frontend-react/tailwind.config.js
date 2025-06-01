@@ -1,11 +1,86 @@
 module.exports = {
+  mode: 'jit',
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#e0f2ff',
+          100: '#b3e5ff',
+          200: '#80d8ff',
+          300: '#4fc3f7',
+          400: '#29b6f6',
+          500: '#03a9f4',
+          600: '#039be5',
+          700: '#0288d1',
+          800: '#0277bd',
+          900: '#01579b',
+        },
+        accent: {
+          50: '#ffe0f0',
+          100: '#ffb3da',
+          200: '#ff80c3',
+          300: '#ff4faf',
+          400: '#ff29a1',
+          500: '#ff0288',
+          600: '#e0037a',
+          700: '#d1006a',
+          800: '#b6005b',
+          900: '#940043',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+      },
+      screens: {
+        'xs': '475px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
+    },
+  },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ['light', 'dark', 'cupcake', 'retro'],
+    themes: [
+      {
+        novastack: {
+          primary: '#03a9f4',
+          secondary: '#ff0288',
+          accent: '#ffd54f',
+          neutral: '#1f2937',
+          'base-100': '#ffffff',
+          'base-200': '#f3f4f6',
+          'base-300': '#e5e7eb',
+          info: '#0288d1',
+          success: '#00c853',
+          warning: '#ffab00',
+          error: '#d32f2f',
+        },
+      },
+      {
+        'novastack-dark': {
+          primary: '#03a9f4',
+          secondary: '#ff0288',
+          accent: '#ffd54f',
+          neutral: '#1f2937',
+          'base-100': '#1a1a1a',
+          'base-200': '#2d2d2d',
+          'base-300': '#404040',
+          info: '#0288d1',
+          success: '#00c853',
+          warning: '#ffab00',
+          error: '#d32f2f',
+        },
+      },
+    ],
   },
 }; 

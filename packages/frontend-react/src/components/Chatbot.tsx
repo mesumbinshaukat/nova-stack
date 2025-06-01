@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatedCard } from './AnimatedCard';
 
 type Message = {
   question: string;
@@ -27,26 +29,54 @@ export default function Chatbot() {
   };
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '0.5rem' }}>
-      <div style={{ maxHeight: '300px', overflowY: 'auto', marginBottom: '0.5rem' }}>
-        {chat.map((msg, i) => (
-          <div key={i} style={{ marginBottom: '0.75rem' }}>
-            <p style={{ margin: 0 }}><strong>You:</strong> {msg.question}</p>
-            <p style={{ margin: 0 }}><strong>Bot:</strong> {msg.answer}</p>
-          </div>
-        ))}
+    <AnimatedCard>
+      <h2 className="card-title font-display text-primary-600">Chat with NovaBot</h2>
+      <div className="h-[300px] overflow-y-auto space-y-4">
+        <AnimatePresence>
+          {chat.map((msg, i) => (
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="chat chat-start"
+              >
+                <div className="chat-bubble chat-bubble-primary">{msg.question}</div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="chat chat-end"
+              >
+                <div className="chat-bubble chat-bubble-secondary">{msg.answer}</div>
+              </motion.div>
+            </React.Fragment>
+          ))}
+        </AnimatePresence>
       </div>
-      <div style={{ display: 'flex' }}>
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Type your message..."
-          style={{ flexGrow: 1, padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc' }}
-        />
-        <button onClick={sendMessage} style={{ marginLeft: '0.5rem', padding: '0.5rem 1rem' }}>
-          Send
-        </button>
+      <div className="card-actions justify-end mt-4">
+        <div className="join w-full">
+          <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Type your message..."
+            className="input input-bordered join-item w-full focus:ring-2 focus:ring-primary/30 transition-all duration-200"
+            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+          />
+          <motion.button 
+            onClick={sendMessage}
+            className="btn btn-primary join-item"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            Send
+          </motion.button>
+        </div>
       </div>
-    </div>
+    </AnimatedCard>
   );
 } 
